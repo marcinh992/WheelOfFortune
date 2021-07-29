@@ -109,8 +109,9 @@ public class MainClass {
     public static String guessLetter(Scanner scanner, String secretWord, String guessess, Player player) {
         System.out.print(" Podaj literę: ");
         String letter = scanner.next();
-        guessess += letter;
-        if (secretWord.contains(letter)) {
+
+        if (secretWord.contains(letter) && !guessess.contains(letter)) {
+            guessess += letter;
             int temporaryPointsHolder = StringUtils.countMatches(secretWord, letter);
             System.out.println("Zgadłeś! Na Twoje konto trafia: " + temporaryPointsHolder + "pkt");
             int pointsCounter = player.getPlayerScore() + temporaryPointsHolder;
@@ -124,6 +125,7 @@ public class MainClass {
     public static String guessWord(Scanner scanner, String secretWord, String guessess, Player player) {
         System.out.println("Podaj całe hasło: ");
          String word = scanner.next();
+
         if (secretWord.equalsIgnoreCase(word)) {
             int pointsFromGuessWord = secretWord.length() - StringUtils.countMatches(secretWord,guessess);
             System.out.println("Gratulację " + player + "!!" + " Odgadłeś hasło prawidłowo!");
