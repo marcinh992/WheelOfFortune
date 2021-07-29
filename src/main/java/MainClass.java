@@ -13,7 +13,7 @@ public class MainClass {
     static final int GUESSLETTER = 1;
     static final int GUESSWORD = 2;
 
-    static final int ROUNDSLIMIT = 1;
+    static final int ROUNDSLIMIT = 4;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
