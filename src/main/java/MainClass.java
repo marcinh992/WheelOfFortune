@@ -13,7 +13,7 @@ public class MainClass {
     static final int GUESSLETTER = 1;
     static final int GUESSWORD = 2;
 
-    static final int ROUNDSLIMIT = 4;
+    static final int ROUNDSLIMIT = 1;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -74,24 +74,24 @@ public class MainClass {
 
             notDone = false;
 
-            for (Player player : Player.players) {
+            for (int currentPlayer = 0; currentPlayer < Player.players.size(); currentPlayer++) {
 
-                notDone = hideSecretWord(secretWord, guessess, notDone);
+                notDone = hideSecretWord(secretWord, guessess,notDone);
 
-                if (!notDone) {
+                if (!notDone){
                     break;
                 }
 
-                MenuInfo.showGuessingMenu(player);
+                MenuInfo.showGuessingMenu(Player.players.get(currentPlayer));
 
                 int option2 = scanner.nextInt();
                 scanner.nextLine();
-                switch (option2) {
+                switch (option2){
                     case GUESSLETTER:
-                        guessess = guessLetter(scanner, secretWord, guessess, player);
+                        guessess = guessLetter(scanner, secretWord, guessess, Player.players.get(currentPlayer));
                         break;
                     case GUESSWORD:
-                        word = guessWord(scanner, secretWord, guessess, player);
+                        word = guessWord(scanner, secretWord, guessess, Player.players.get(currentPlayer));
                         break;
                     default:
                         System.out.println("Nieprawidłowa akcja");
@@ -104,19 +104,6 @@ public class MainClass {
                 break;
             }
         }
-    }
-
-    public static String guessWord(Scanner scanner, String secretWord, String guessess, Player player) {
-        System.out.println("Podaj całe hasło: ");
-         String word = scanner.next();
-        if (secretWord.equalsIgnoreCase(word)) {
-            int pointsFromGuessWord = secretWord.length() - guessess.length();
-            System.out.println("Gratulację " + player + "!!" + " Odgadłeś hasło prawidłowo!");
-            System.out.println("Na Twoje konto trafia: " + pointsFromGuessWord + "pkt");
-            player.setPlayerScore(pointsFromGuessWord);
-        } else
-            System.out.println("Pudło!");
-        return word;
     }
 
     public static String guessLetter(Scanner scanner, String secretWord, String guessess, Player player) {
@@ -132,6 +119,19 @@ public class MainClass {
             System.out.println("Pudło!");
         }
         return guessess;
+    }
+
+    public static String guessWord(Scanner scanner, String secretWord, String guessess, Player player) {
+        System.out.println("Podaj całe hasło: ");
+         String word = scanner.next();
+        if (secretWord.equalsIgnoreCase(word)) {
+            int pointsFromGuessWord = secretWord.length() - StringUtils.countMatches(secretWord,guessess);
+            System.out.println("Gratulację " + player + "!!" + " Odgadłeś hasło prawidłowo!");
+            System.out.println("Na Twoje konto trafia: " + pointsFromGuessWord + "pkt");
+            player.setPlayerScore(pointsFromGuessWord);
+        } else
+            System.out.println("Pudło!");
+        return word;
     }
 //spróbować wkomponować StringBuildera zamiast sout'a StringBuilder.append - chyba i zwrócić stringa, który jest w stringbuilderze
     private static boolean hideSecretWord(String secretWord, String guessess, boolean notDone) {

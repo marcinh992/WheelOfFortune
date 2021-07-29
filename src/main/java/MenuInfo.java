@@ -19,7 +19,8 @@ public class MenuInfo {
         System.out.println("Gracze mają do wyboru dwie opcję - odgadnięcie pojedyńczej litery bądź całego hasła");
         System.out.println("Za każdą jedną literę, która została odkryta gracz otrzymuję 1pkt");
         System.out.println("W przypadku odgadnięcia całego hasła gracz otrzymuję tyle punktów ");
-        System.out.println("ile liter zostało nieodsłonionych. Cała gra składa się z czterech rund, w któych");
+        System.out.println("ile liter zostało nieodsłonionych. Cała gra składa się z " + MainClass.ROUNDSLIMIT +
+                "rund, w których");
         System.out.println("gracze odgadują hasło naprzemiennie. Wygrywa gracz z największą liczbą punktów");
         System.out.println(" ");
         System.out.println("---------------------");

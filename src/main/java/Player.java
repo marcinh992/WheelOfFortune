@@ -15,10 +15,14 @@ public class Player implements Comparable<Player> {
 
     public static void addPlayers(List<String> playersNames) {
         int startingScore = 0;
-        for (String name : playersNames) {
+        String name;
+        for (int i = 0; i <playersNames.size() ; i++) {
+            name = playersNames.get(i);
             players.add(new Player(name, startingScore));
         }
     }
+
+
 
     public static String printLeaderBoard() {
         Collections.sort(players);
@@ -28,6 +32,7 @@ public class Player implements Comparable<Player> {
             position = position + i;
             place = "Miejsce " + position + ' ' + players.get(i).getPlayerName() + " z wynikiem "
                     + players.get(i).getPlayerScore() + "pkt";
+            System.out.println(place);
         }
         return place;
     }
